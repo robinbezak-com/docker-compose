@@ -8,6 +8,8 @@ services:
     container_name: postgres
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      N8N_DB_PASSWORD: ${N8N_DB_PASSWORD}
+      PGADMIN_VIEWER_PASSWORD: ${PGADMIN_VIEWER_PASSWORD}
     volumes:
       - postgres_db_data:/var/lib/postgresql/data
       - ./db-init:/docker-entrypoint-initdb.d
