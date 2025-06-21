@@ -17,6 +17,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           script: |
+            ssh-keygen -t ed25519 -C "new-github-actions-key"
+            cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+            cat ~/.ssh/id_ed25519
             cd docker-compose
             echo "SA_PASSWORD=${{ secrets.SA_PASSWORD }}" > .env
             echo "DB_ADMIN_USER=${{ secrets.DB_ADMIN_USER }}" >> .env
