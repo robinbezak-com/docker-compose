@@ -27,5 +27,5 @@ jobs:
             echo "DB_ADMIN_PASSWORD=${{ secrets.DB_ADMIN_PASSWORD }}" >> .env
             echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
             git pull origin main
-            docker-compose pull
-            docker-compose up --build -d --remove-orphans
+            docker compose pull
+            docker compose up --build -d --remove-orphans
