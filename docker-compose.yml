@@ -7,3 +7,5 @@ services:
     environment:
       # This is required by the base MSSQL image
       ACCEPT_EULA: "Y"
+    env_file:
+      - .env
