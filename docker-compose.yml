@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   database:
-    image: ghcr.io/bezakrobin
+    image: ghcr.io/robinbezak-cz/database-service:latest
     container_name: mssql_server
     ports:
       - "1433:1433"
