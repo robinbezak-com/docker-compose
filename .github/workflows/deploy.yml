@@ -1,0 +1,27 @@
+# .github/workflows/deploy.yml
+
+name: Deploy to Wedos VPS
+
+# This section makes the workflow manual
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_PASSWORD }}
+          script: |
+            cd docker-compose
+            echo "SA_PASSWORD=${{ secrets.SA_PASSWORD }}" > .env
+            echo "DB_ADMIN_USER=${{ secrets.DB_ADMIN_USER }}" >> .env
+            echo "DB_ADMIN_PASSWORD=${{ secrets.DB_ADMIN_PASSWORD }}" >> .env
+            echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+            git pull origin main
+            docker-compose pull
+            docker-compose up --build -d --remove-orphans
